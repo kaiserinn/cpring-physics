@@ -23,5 +23,9 @@ void da_delete(DArray *da);
 
 void da_remove(DArray *da, size_t index);
 
+void da_shift(DArray *da);
+
+void da_pop(DArray *da);
+
 #endif // ! D_ARRAY_H
  

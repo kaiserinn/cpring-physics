@@ -82,6 +82,16 @@ void da_remove(DArray *da, size_t index)
     da->length--;
 }
 
+void da_shift(DArray *da)
+{
+    da_remove(da, 0);
+}
+
+void da_pop(DArray *da)
+{
+    da_remove(da, da->length-1);
+}
+
 void da_delete(DArray *da)
 {
     if (da != NULL)
