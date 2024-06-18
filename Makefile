@@ -1,3 +1,7 @@
+#
+# Example Makefile for linux build
+#
+
 # Compiler
 CC = clang
 
