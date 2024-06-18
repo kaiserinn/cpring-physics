@@ -8,13 +8,17 @@
 DArray* da_new(void)
 {
     DArray *p = malloc(sizeof(DArray));
+
     if (p == NULL)
+    {
         return NULL;
+    }
 
     p->_alloc = INITIAL_SIZE;
     p->length = 0;
 
-    p->items = calloc(INITIAL_SIZE, sizeof(void *));
+    p->items = calloc(INITIAL_SIZE, sizeof(ArrayValue ));
+
     if (p->items == NULL)
     {
         free(p);
@@ -27,14 +31,18 @@ DArray* da_new(void)
 static int da_resize(DArray *da)
 {
     da->_alloc *= 2;
-    void *p = realloc(da->items, da->_alloc);
+    ArrayValue *p = realloc(da->items, da->_alloc);
+
     if (p == NULL)
+    {
         return 0;
+    }
+
     da->items = p;
     return 1;
 }
 
-int da_insert(DArray *da, size_t index, void *value)
+int da_insert(DArray *da, size_t index, ArrayValue value)
 {
     if (index > da->length || index < 0)
     {
@@ -49,25 +57,28 @@ int da_insert(DArray *da, size_t index, void *value)
             return 0;
         }
     }
-    memmove(&da->items[index+1], &da->items[index], (da->length - index) * sizeof(void *));
+
+    memmove(&da->items[index+1], &da->items[index], (da->length - index) * sizeof(ArrayValue ));
+
     da->items[index] = value;
     da->length++;
+
     return 1;
 }
 
-int da_append(DArray *da, void *value)
+int da_append(DArray *da, ArrayValue value)
 {
     return da_insert(da, da->length, value);
 }
 
-int da_prepend(DArray *da, void *value)
+int da_prepend(DArray *da, ArrayValue value)
 {
     return da_insert(da, da->length, value);
 }
 
 void da_remove(DArray *da, size_t index)
 {
-    memmove(&da->items[index], &da->items[index+1], (da->length - index) * sizeof(void *));
+    memmove(&da->items[index], &da->items[index+1], (da->length - index) * sizeof(ArrayValue ));
     da->length--;
 }
 

@@ -3,19 +3,21 @@
  
 #include <stdlib.h>
 
+typedef void *ArrayValue ;
+
 typedef struct DArray {
     size_t _alloc;
     size_t length;
-    void **items;
+    ArrayValue *items;
 } DArray;
 
 DArray* da_new(void);
 
-int da_insert(DArray *da, size_t index, void *value);
+int da_insert(DArray *da, size_t index, ArrayValue value);
 
-int da_append(DArray *da, void *value);
+int da_append(DArray *da, ArrayValue value);
 
-int da_append(DArray *da, void *value);
+int da_append(DArray *da, ArrayValue value);
 
 void da_delete(DArray *da);
 
