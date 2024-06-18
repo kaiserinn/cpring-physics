@@ -74,5 +74,7 @@ int main(void)
 
     CloseWindow();
 
+    da_delete(springs);
+
     return 0;
 }
